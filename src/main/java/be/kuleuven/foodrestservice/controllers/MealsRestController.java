@@ -61,4 +61,21 @@ public class MealsRestController {
                 linkTo(methodOn(MealsRestController.class).getMealById(id)).withSelfRel(),
                 linkTo(methodOn(MealsRestController.class).getMeals()).withRel("All Meals"));
     }
+
+    @GetMapping("/rest/meals/cheapest")
+    Meal getCheapestMeal() {
+        Meal cheapestMeal = mealsRepository.getCheapestMeal();
+        if (cheapestMeal == null) {
+            throw new MealNotFoundException("No meals found.");
+        }
+        return cheapestMeal;
+    }
+    @GetMapping("/rest/meals/largest")
+    Meal getLargestMeal() {
+        Meal largestMeal = mealsRepository.getLargestMeal();
+        if (largestMeal == null) {
+            throw new MealNotFoundException("No meals found.");
+        }
+        return largestMeal;
+    }
 }
